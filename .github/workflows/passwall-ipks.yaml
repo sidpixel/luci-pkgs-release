@@ -28,7 +28,7 @@ on:
 
 env:
   TZ: Asia/Shanghai
-  GITHUB.REPO: xiaorouji/openwrt-passwall
+  GITHUBREPO: xiaorouji/openwrt-passwall
   PKGNAME: luci-app-passwall
 jobs:
   job_check:
@@ -48,7 +48,7 @@ jobs:
       - name: Check version
         id: check_version
         env:
-          url_release: https://api.github.com/repos/${{ GITHUB.REPO }}/releases/latest
+          url_release: https://api.github.com/repos/${{ env.GITHUBREPO }}/releases/latest
         run: |
           latest_version=$(grep -oP 'PKG_VERSION:=\K.*' Makefile | sed 's/^/v/')
           latest_release=$(wget -qO- -t1 -T2 ${{env.url_release}} | awk -F '"' '/tag_name/{print $4}')
@@ -102,30 +102,30 @@ jobs:
           echo "src-git-full packages https://github.com/openwrt/packages.git;openwrt-18.06" >> feeds.conf
           echo "src-git-full luci https://git.openwrt.org/project/luci.git;openwrt-18.06" >> feeds.conf
           echo "src-git-full routing https://git.openwrt.org/feed/routing.git;openwrt-18.06"  >> feeds.conf
-          git clone -b main https://github.com/${{ GITHUB.REPO }}.git package/downloads/${{ PKGNAME }}
+          git clone -b main https://github.com/${{ env.GITHUBREPO }}.git package/downloads/${{ env.PKGNAME }}
           ./scripts/feeds update -a
-          echo "CONFIG_PACKAGE_${{ PKGNAME }}=m" > .config
-          ./scripts/feeds install -d n ${{ PKGNAME }}
+          echo "CONFIG_PACKAGE_${{ env.PKGNAME }}=m" > .config
+          ./scripts/feeds install -d n ${{ env.PKGNAME }}
           make download -j8
 
       - name: Configure Argon (18.06)
         run: |
           cd sdk
-          ./scripts/feeds install ${{ PKGNAME }}
+          ./scripts/feeds install ${{ env.PKGNAME }}
           echo "CONFIG_ALL_NONSHARED=n" > .config
           echo "CONFIG_ALL_KMODS=n" >> .config
           echo "CONFIG_ALL=n" >> .config
           echo "CONFIG_AUTOREMOVE=n" >> .config
           echo "CONFIG_LUCI_LANG_zh_Hans=y" >> .config
-          echo "CONFIG_PACKAGE_${{ PKGNAME }}=m" >> .config
+          echo "CONFIG_PACKAGE_${{ env.PKGNAME }}=m" >> .config
           make defconfig
 
       - name: Compile Argon (18.06)
         id: compile
         run: |
           cd sdk
-          echo "make package/${{ PKGNAME }}/{clean,compile} -j$(nproc)"
-          make package/${{ PKGNAME }}/{clean,compile} -j$(nproc)
+          echo "make package/${{ env.PKGNAME }}/{clean,compile} -j$(nproc)"
+          make package/${{ env.PKGNAME }}/{clean,compile} -j$(nproc)
           mv bin/packages/i386_pentium4/base/ ../
           rm .config .config.old
           cd ..
