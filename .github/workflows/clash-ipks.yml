@@ -109,7 +109,7 @@ jobs:
           ./scripts/feeds update -a
           echo "CONFIG_PACKAGE_${{ env.PKGNAME }}=m" > .config
           ./scripts/feeds install -d n ${{ env.PKGNAME }}
-          make download -j8
+          make download -j8  
 
       - name: Configure package (18.06)
         run: |
@@ -128,7 +128,7 @@ jobs:
         run: |
           cd sdk
           echo "make package/${{ env.PKGNAME }}/{clean,compile} -j$(nproc)"
-          make package/${{ env.PKGNAME }}/{clean,compile} -j$(nproc)
+          make package/${{ env.PKGNAME }}/{clean,compile} -j$(nproc) ||  make package/${{ env.PKGNAME }}/{clean,compile} -j1  V=sc
           mv bin/packages/i386_pentium4/base/ ../
           rm .config .config.old
           cd ..
