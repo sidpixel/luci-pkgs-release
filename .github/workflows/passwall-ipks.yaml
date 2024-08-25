@@ -132,7 +132,6 @@ jobs:
 
           tree
           ls -alh
-          ls -alh ${{ env.FIRMWARE }}/base/
 
       - name: Upload Argon (18.06) ipks to release
         uses: softprops/action-gh-release@v1
