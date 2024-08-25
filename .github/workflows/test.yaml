@@ -61,7 +61,7 @@ jobs:
         git clone  -b $REPO_BRANCH $REPO_URL openwrt
 
 
-    - name: Configure Argon (18.06)
+    - name: Configure firemware (18.06)
       run: |
         cd sdk
         ./scripts/feeds install 
@@ -73,7 +73,7 @@ jobs:
         echo "CONFIG_LUCI_LANG_zh_Hans=y" >> .config
         make defconfig
 
-    - name: Compile Argon (18.06)
+    - name: Compile firemware (18.06)
       id: compile
       run: |
         cd sdk
@@ -84,11 +84,11 @@ jobs:
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV        
 
 
-    - name: Upload Argon (18.06) ipks to release
+    - name: Upload firemware (18.06) ipks to release
       uses: softprops/action-gh-release@v1
       if: steps.compile.outputs.status == 'success'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{needs.job_check.outputs.argon_version}}
+        tag_name: ${{needs.job_check.outputs.latest_version}}
         files: ${{ env.FIRMWARE }}/base/luci*.ipk
