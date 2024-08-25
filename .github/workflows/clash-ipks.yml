@@ -51,11 +51,14 @@ jobs:
         env:
           url_release: https://api.github.com/repos/${{ env.GITHUBREPO }}/releases
         run: |
-          latest_version= ${{ env.PKGVER }}
-          latest_release= ${{ env.PKGVER }}
-          
+          latest_version=$(wget -qO- -t1 -T2 ${{env.url_release}} | awk -F '"' '/tag_name/{print $4}')
+          latest_release=$(wget -qO- -t1 -T2 ${{env.url_release}} | awk -F '"' '/tag_name/{print $4}')
+          has_update=$([ "${latest_version}" != "${latest_release}" ] && echo true || echo false)
           echo "latest_version=${latest_version}" >> $GITHUB_OUTPUT
           echo "has_update=${has_update}" >> $GITHUB_OUTPUT
+          echo "latest_version: ${latest_version}"
+          echo "latest_release: ${latest_release}"
+          echo "has_update: ${has_update}"
 
       - name: Generate new tag & release
         #if: steps.check_version.outputs.has_update == 'true'
