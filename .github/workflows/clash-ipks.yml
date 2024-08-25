@@ -51,14 +51,11 @@ jobs:
         env:
           url_release: https://api.github.com/repos/${{ env.GITHUBREPO }}/releases/latest
         run: |
-          latest_version: ${{ env.PKGVER }}
-          latest_release: ${{ env.PKGVER }}
-          has_update=$([ "${latest_version}" != "${latest_release}" ] && echo true || echo false)
+          latest_version= ${{ env.PKGVER }}
+          latest_release= ${{ env.PKGVER }}
+          
           echo "latest_version=${latest_version}" >> $GITHUB_OUTPUT
           echo "has_update=${has_update}" >> $GITHUB_OUTPUT
-          echo "latest_version: ${latest_version}"
-          echo "latest_release: ${latest_release}"
-          echo "has_update: ${has_update}"
 
       - name: Generate new tag & release
         #if: steps.check_version.outputs.has_update == 'true'
