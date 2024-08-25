@@ -82,7 +82,7 @@ jobs:
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV        
 
 
-    - name: Upload firemware (18.06) ipks to release
+    - name: Upload firemware (18.06)  to release
       uses: softprops/action-gh-release@v1
       if: steps.compile.outputs.status == 'success'
       env:
