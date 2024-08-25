@@ -76,7 +76,7 @@ jobs:
       run: |
         cd openwrt
         echo "make firmware -j$(nproc)"
-        make -j$(nproc)              
+        make -j$(nproc)  || make -j1 V=s        
         tree
         echo "status=success" >> $GITHUB_OUTPUT
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV        
