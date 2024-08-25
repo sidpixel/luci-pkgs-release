@@ -124,14 +124,11 @@ jobs:
           cd sdk
           echo "make package/luci-theme-argon/{clean,compile} -j$(nproc)"
           make package/luci-theme-argon/{clean,compile} -j$(nproc)
-          mv bin/packages/ ../
+          mv bin/packages/i386_pentium4/base/ ../
           rm .config .config.old
           cd ..
           echo "status=success" >> $GITHUB_OUTPUT
           echo "FIRMWARE=$PWD" >> $GITHUB_ENV
-
-          tree
-          ls -alh
 
       - name: Upload Argon (18.06) ipks to release
         uses: softprops/action-gh-release@v1
