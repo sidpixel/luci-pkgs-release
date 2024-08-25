@@ -24,10 +24,12 @@ on:
     branches:
       - '18.06'
     paths:
-      - 'luci-app-passwall/Makefile'
+      #- 'luci-app-passwall/Makefile'
+      - 'README.md'
+
 env:
   TZ: Asia/Shanghai
-  GITHUB.REPO: xiaorouji/openwrt-passwall/tree/main/luci-app-passwall
+  GITHUB.REPO: xiaorouji/openwrt-passwall/luci-app-passwall
 jobs:
   job_check:
     #if: github.repository == ${{ github.repository }}
@@ -46,8 +48,7 @@ jobs:
       - name: Check version
         id: check_version
         env:
-          github.repository: ${{ GITHUB.REPO }}
-          url_release: https://api.github.com/repos/${{ github.repository }}/releases/latest
+          url_release: https://api.github.com/repos/${{ GITHUB.REPO }}/releases/latest
         run: |
           latest_version=$(grep -oP 'PKG_VERSION:=\K.*' Makefile | sed 's/^/v/')
           latest_release=$(wget -qO- -t1 -T2 ${{env.url_release}} | awk -F '"' '/tag_name/{print $4}')
@@ -101,7 +102,7 @@ jobs:
           echo "src-git-full packages https://github.com/openwrt/packages.git;openwrt-18.06" >> feeds.conf
           echo "src-git-full luci https://git.openwrt.org/project/luci.git;openwrt-18.06" >> feeds.conf
           echo "src-git-full routing https://git.openwrt.org/feed/routing.git;openwrt-18.06"  >> feeds.conf
-          git clone -b 18.06 https://github.com/${{ github.repository }}.git package/downloads/luci-app-passwall
+          git clone -b 18.06 https://github.com/${{ GITHUB.REPO }}.git package/downloads/luci-app-passwall
           ./scripts/feeds update -a
           echo "CONFIG_PACKAGE_luci-app-passwall=m" > .config
           ./scripts/feeds install -d n luci-app-passwall
