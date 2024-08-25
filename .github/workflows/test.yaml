@@ -89,4 +89,4 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: 18.06 Official Firmware
-        files: ${{ env.FIRMWARE }}/base/luci*.ipk
+        files: ${{ env.FIRMWARE }}/bin/targets/*/*/*
