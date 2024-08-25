@@ -13,13 +13,6 @@
 
 name: "passwall Auto compile with OpenWrt SDK"
 on:
-  repository_dispatch:
-  workflow_dispatch:
-    inputs:
-      ssh:
-        description: 'SSH connection to Actions'
-        required: false
-        default: 'false'
   push:
     branches:
       - '18.06'
@@ -36,7 +29,7 @@ jobs:
     name: Check Version
     runs-on: ubuntu-20.04
     outputs:
-      argon_version: ${{ steps.check_version.outputs.latest_version }}
+      pkg_version: ${{ steps.check_version.outputs.latest_version }}
       has_update: ${{ steps.check_version.outputs.has_update }}
     steps:
       - name: Checkout
@@ -68,8 +61,8 @@ jobs:
           name: For Lean's LEDE 18.06 LuCI
           tag_name: ${{steps.check_version.outputs.latest_version}}
 
-  job_build_argon:
-    name: Build Argon (18.06)
+  job_build_package:
+    name: Build package (18.06)
     needs: job_check
     #if: needs.job_check.outputs.has_update == 'true'
     runs-on: ubuntu-20.04
@@ -109,7 +102,7 @@ jobs:
           ./scripts/feeds install -d n ${{ env.PKGNAME }}
           make download -j8
 
-      - name: Configure Argon (18.06)
+      - name: Configure package (18.06)
         run: |
           cd sdk
           ./scripts/feeds install ${{ env.PKGNAME }}
@@ -121,7 +114,7 @@ jobs:
           echo "CONFIG_PACKAGE_${{ env.PKGNAME }}=m" >> .config
           make defconfig
 
-      - name: Compile Argon (18.06)
+      - name: Compile package (18.06)
         id: compile
         run: |
           cd sdk
@@ -133,11 +126,11 @@ jobs:
           echo "status=success" >> $GITHUB_OUTPUT
           echo "FIRMWARE=$PWD" >> $GITHUB_ENV
 
-      - name: Upload Argon (18.06) ipks to release
+      - name: Upload package (18.06) ipks to release
         uses: softprops/action-gh-release@v1
         if: steps.compile.outputs.status == 'success'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{needs.job_check.outputs.argon_version}}
+          tag_name: ${{needs.job_check.outputs.pkg_version}}
           files: ${{ env.FIRMWARE }}/base/luci*.ipk
