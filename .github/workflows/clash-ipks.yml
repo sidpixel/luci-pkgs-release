@@ -25,7 +25,7 @@ env:
   TZ: Asia/Shanghai
   GITHUBREPO: vernesong/OpenClash
   PKGNAME: luci-app-openclash
-  PKGVER: 0.46.014
+  PKGVER: "0.46.014"
 
 
 
