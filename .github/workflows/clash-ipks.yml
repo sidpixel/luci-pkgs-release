@@ -43,7 +43,7 @@ jobs:
       - name: Check version
         id: check_version
         env:
-          url_release: https://api.github.com/${{ env.GITHUBREPO }}/releases/latest
+          url_release: https://api.github.com/repos/${{ env.GITHUBREPO }}/releases/latest
         run: |
           latest_version=$(wget -qO- -t1 -T2 ${{env.url_release}} | awk -F '"' '/tag_name/{print $4}')
           latest_release=$(wget -qO- -t1 -T2 ${{env.url_release}} | awk -F '"' '/tag_name/{print $4}')
