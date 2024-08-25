@@ -124,7 +124,7 @@ jobs:
           cd sdk
           echo "make package/luci-theme-argon/{clean,compile} -j$(nproc)"
           make package/luci-theme-argon/{clean,compile} -j$(nproc)
-          mv bin/packages/x86/generic/base/ ../
+          mv bin/packages/ ../
           rm .config .config.old
           cd ..
           echo "status=success" >> $GITHUB_OUTPUT
