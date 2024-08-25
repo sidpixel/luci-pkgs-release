@@ -97,13 +97,3 @@ jobs:
           openwrt/bin/targets/x86/generic/openwrt-x86-generic-generic-squashfs-combined-efi.img.gz
           openwrt/bin/targets/x86/generic/openwrt-x86-generic-generic-squashfs-rootfs.img.gz
           openwrt/bin/targets/x86/generic/openwrt-x86-generic-generic.manifest
-
-
-    - name: Upload firemware (18.06)  to release
-      uses: softprops/action-gh-release@v1
-      if: steps.compile.outputs.status == 'success'
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: ${{ env.ARCH }} 18.06 Official Firmware
-        files: openwrt/bin/targets/*/*/*
