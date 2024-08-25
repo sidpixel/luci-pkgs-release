@@ -25,7 +25,7 @@ env:
   TZ: Asia/Shanghai
   GITHUBREPO: vernesong/OpenClash
   PKGNAME: luci-app-openclash
-  PKGVER: "0.46.014"
+  PKGVER: 0.46.014
 
 
 
@@ -51,8 +51,8 @@ jobs:
         env:
           url_release: https://api.github.com/repos/${{ env.GITHUBREPO }}/releases/latest
         run: |
-          latest_version= ${{ env.PKGVER }}
-          latest_release= ${{ env.PKGVER }}
+          latest_version: ${{ env.PKGVER }}
+          latest_release: ${{ env.PKGVER }}
           has_update=$([ "${latest_version}" != "${latest_release}" ] && echo true || echo false)
           echo "latest_version=${latest_version}" >> $GITHUB_OUTPUT
           echo "has_update=${has_update}" >> $GITHUB_OUTPUT
