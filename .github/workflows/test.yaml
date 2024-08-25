@@ -11,15 +11,8 @@
 #   4.Let's take [Actions]
 #
 
-name: "passwall Auto compile with OpenWrt SDK"
+name: "test passwall Auto compile with OpenWrt SDK"
 on:
-  repository_dispatch:
-  workflow_dispatch:
-    inputs:
-      ssh:
-        description: 'SSH connection to Actions'
-        required: false
-        default: 'false'
   push:
     branches:
       - '18.06'
@@ -29,15 +22,13 @@ on:
 env:
   TZ: Asia/Shanghai
   GITHUBREPO: xiaorouji/openwrt-passwall
-  PKGNAME: luci-app-passwall
+  PKGNAME: openwrt-passwall
+  LUCIPKGNAME: luci-app-passwall
+
 jobs:
   job_check:
-    #if: github.repository == ${{ github.repository }}
     name: Check Version
     runs-on: ubuntu-20.04
-    outputs:
-      argon_version: ${{ steps.check_version.outputs.latest_version }}
-      has_update: ${{ steps.check_version.outputs.has_update }}
     steps:
       - name: Checkout
         uses: actions/checkout@main
@@ -65,11 +56,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          name: For Lean's LEDE 18.06 LuCI
+          name: For Official's LEDE 18.06 LuCI
           tag_name: ${{steps.check_version.outputs.latest_version}}
 
-  job_build_argon:
-    name: Build Argon (18.06)
+  job_build_pkg:
+    name: Build pkgs (18.06)
     needs: job_check
     #if: needs.job_check.outputs.has_update == 'true'
     runs-on: ubuntu-20.04
@@ -91,7 +82,7 @@ jobs:
           key: openwrt-sdk-18.06.9-x86-generic
 
       - name: Initialization environment
-        #if: steps.cache-sdk.outputs.cache-hit != 'true'
+        if: steps.cache-sdk.outputs.cache-hit != 'true'
         env:
           url_sdk: https://downloads.openwrt.org/releases/18.06.9/targets/x86/generic/openwrt-sdk-18.06.9-x86-generic_gcc-7.3.0_musl.Linux-x86_64.tar.xz
         run: |
