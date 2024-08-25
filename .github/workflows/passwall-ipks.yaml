@@ -61,7 +61,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          name: For Lean's LEDE 18.06 LuCI
+          name: For Offical's LEDE 18.06 LuCI
           tag_name: ${{steps.check_version.outputs.latest_version}}
 
   job_build_package:
