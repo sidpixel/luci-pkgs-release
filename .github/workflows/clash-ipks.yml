@@ -24,8 +24,8 @@ on:
 
 env:
   TZ: Asia/Shanghai
-  GITHUBREPO: xiaorouji/openwrt-passwall
-  PKGNAME: luci-app-passwall
+  GITHUBREPO: vernesong/OpenClash
+  PKGNAME: luci-app-openclash
 jobs:
   job_check:
     #if: github.repository == ${{ github.repository }}
