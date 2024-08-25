@@ -19,6 +19,7 @@ on:
 
 env:
   TZ: Asia/Shanghai
+  ARCH: 8632
   REPO_URL: https://github.com/openwrt/openwrt
   REPO_BRANCH: openwrt-18.06
 
@@ -104,5 +105,5 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: 18.06 Official Firmware
+        tag_name: ${{ env.ARCH }} 18.06 Official Firmware
         files: openwrt/bin/targets/*/*/*
