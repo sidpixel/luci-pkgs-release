@@ -127,7 +127,7 @@ jobs:
         run: |
           cd sdk
           echo "make package/${{ env.PKGNAME }}/{clean,compile} -j$(nproc)"
-          make package/${{ env.PKGNAME }}/{clean,compile} -j$(nproc) ||  make package/${{ env.PKGNAME }}/{clean,compile} -j1  V=sc
+          make package/${{ env.PKGNAME }}/{clean,compile} -j1 ||  make package/${{ env.PKGNAME }}/{clean,compile} -j1  V=sc
           mv bin/packages/i386_pentium4/base/ ../
           rm .config .config.old
           cd ..
