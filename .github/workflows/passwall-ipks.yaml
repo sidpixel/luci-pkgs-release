@@ -26,6 +26,11 @@ env:
   TZ: Asia/Shanghai
   GITHUBREPO: xiaorouji/openwrt-passwall
   PKGNAME: luci-app-passwall
+
+
+
+
+  
 jobs:
   job_check:
     #if: github.repository == ${{ github.repository }}
