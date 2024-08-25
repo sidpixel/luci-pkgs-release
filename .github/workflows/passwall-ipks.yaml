@@ -13,6 +13,9 @@
 
 name: "passwall Auto compile with OpenWrt SDK"
 on:
+  repository_dispatch:
+  workflow_dispatch:
+    inputs:
   push:
     branches:
       - '18.06'
