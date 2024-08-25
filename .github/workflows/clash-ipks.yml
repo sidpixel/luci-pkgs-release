@@ -49,7 +49,7 @@ jobs:
       - name: Check version
         id: check_version
         env:
-          url_release: https://api.github.com/repos/${{ env.GITHUBREPO }}/releases/latest
+          url_release: https://api.github.com/repos/${{ env.GITHUBREPO }}/releases
         run: |
           latest_version= ${{ env.PKGVER }}
           latest_release= ${{ env.PKGVER }}
