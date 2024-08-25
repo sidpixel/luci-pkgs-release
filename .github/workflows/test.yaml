@@ -31,13 +31,6 @@ jobs:
       uses: actions/checkout@main
 
 
-    - name: Generate new tag & release
-      uses: softprops/action-gh-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        name: For Official's LEDE 18.06 LuCI
-        tag_name: ${{steps.check_version.outputs.latest_version}}
 
     - name: Initialization environment and space clean
       run: |
@@ -90,5 +83,5 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{needs.job_check.outputs.latest_version}}
+        tag_name: 18.06 Official Firmware
         files: ${{ env.FIRMWARE }}/base/luci*.ipk
