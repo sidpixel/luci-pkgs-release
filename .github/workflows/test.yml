@@ -38,7 +38,7 @@ jobs:
     - name: Configure feeds.conf
       run: |
         cd openwrt
-        cat > feeds.conf  << EOF 
+        cat  << EOF > feeds.conf 
         src-git base https://github.com/openwrt/openwrt.git;openwrt-18.06
         src-git-full packages https://github.com/openwrt/packages.git;openwrt-18.06
         src-git-full luci https://git.openwrt.org/project/luci.git;openwrt-18.06
@@ -51,7 +51,8 @@ jobs:
         ./scripts/feeds install 
     - name: Configure .config.conf
       run: |
-        cat  > .config << EOF
+        cd openwrt
+        cat << EOF > .config 
         CONFIG_TARGET_x86=y
         CONFIG_TARGET_x86_generic=y
         CONFIG_TARGET_x86_generic_Generic=y
