@@ -64,12 +64,17 @@ jobs:
         echo "src-git-full routing https://git.openwrt.org/feed/routing.git;openwrt-18.06"  >> feeds.conf   
         ./scripts/feeds update -a        
         ./scripts/feeds install 
-        echo "CONFIG_TARGET_x86=y" > .config
-        echo "CONFIG_TARGET_x86_generic=y" >> .config
-        echo "CONFIG_TARGET_x86_generic_Generic=y" >> .config
-        echo "CONFIG_TARGET_KERNEL_PARTSIZE=32" >> .config
-        echo "CONFIG_TARGET_ROOTFS_PARTSIZE=500" >> .config
-        echo "CONFIG_LUCI_LANG_zh_Hans=y" >> .config
+        cat <<EOF > .config
+        CONFIG_TARGET_x86=y
+        CONFIG_TARGET_x86_generic=y
+        CONFIG_TARGET_x86_generic_Generic=y
+        CONFIG_TARGET_KERNEL_PARTSIZE=32
+        CONFIG_TARGET_ROOTFS_PARTSIZE=500
+        CONFIG_LUCI_LANG_zh_Hans=y
+        CONFIG_TARGET_PREINIT_IP="10.0.0.1"
+        CONFIG_TARGET_PREINIT_BROADCAST="10.0.0.255"
+        EOF
+        
         make defconfig
 
     - name: Compile firemware (18.06)
