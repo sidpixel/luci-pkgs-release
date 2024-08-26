@@ -38,7 +38,7 @@ jobs:
 
     - name: Configure feeds.conf
       run: |
-        cd openwrt
+        #cd openwrt
         cat > feeds.conf  << EOF 
         src-git base https://github.com/openwrt/openwrt.git;openwrt-18.06
         src-git-full packages https://github.com/openwrt/packages.git;openwrt-18.06
@@ -53,7 +53,7 @@ jobs:
 
     - name: Configure .config file
       run: |
-        cd openwrt
+        #cd openwrt
         cat <<EOF > .config
         CONFIG_TARGET_x86=y
         CONFIG_TARGET_x86_generic=y
