@@ -49,6 +49,8 @@ jobs:
         git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git package/lean/luci-theme-argon
         ./scripts/feeds update -a        
         ./scripts/feeds install 
+    - name: Configure .config.conf
+      run: |
         cat  > .config << EOF
         CONFIG_TARGET_x86=y
         CONFIG_TARGET_x86_generic=y
@@ -67,7 +69,7 @@ jobs:
         CONFIG_PACKAGE_luci-ssl-openssl=y
         CONFIG_PACKAGE_luci-app-wireguard=y
         EOF     
-          
+
         make defconfig
 
     - name : Upload artifact
