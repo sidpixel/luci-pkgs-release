@@ -92,7 +92,7 @@ jobs:
       run: |
         cd openwrt
         ls -alh
-        tree
+        tree -d ~/openwrt/
     - name: Release
       uses: softprops/action-gh-release@v1
       if: steps.compile.outputs.status == 'success'
