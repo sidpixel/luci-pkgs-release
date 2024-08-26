@@ -44,7 +44,6 @@ jobs:
     - name: Configure firemware (18.06)
       run: |
         cd openwrt
-        #update feeds.conf
         cat <<EOF > feeds.conf
         git clone https://github.com/destan19/OpenAppFilter.git package/OpenAppFilter
         git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git package/lean/luci-theme-argon
@@ -58,7 +57,6 @@ jobs:
         ./scripts/feeds update -a        
         ./scripts/feeds install 
 
-        #update .config file
         cat <<EOF > .config
         CONFIG_TARGET_x86=y
         CONFIG_TARGET_x86_generic=y
