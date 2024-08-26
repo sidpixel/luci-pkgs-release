@@ -88,6 +88,11 @@ jobs:
         name: OpenWrt-x86-32
         path: openwrt/bin/targets
         
+    - name:
+      run: |
+        cd openwrt
+        ls -alh
+        tree
     - name: Release
       uses: softprops/action-gh-release@v1
       if: steps.compile.outputs.status == 'success'
