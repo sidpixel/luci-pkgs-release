@@ -72,6 +72,7 @@ jobs:
         EOF     
 
         make defconfig
+        cat .config
 
     - name : Upload artifact
       uses: actions/upload-artifact@master
