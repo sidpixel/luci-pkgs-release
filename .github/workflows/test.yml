@@ -71,6 +71,8 @@ jobs:
         CONFIG_PACKAGE_luci-ssl-openssl=y
         CONFIG_PACKAGE_luci-app-wireguard=y
         CONFIG_PACKAGE_luci-app-openclash=y
+        CONFIG_PACKAGE_uci-base=y
+        CONFIG_PACKAGE_luci-compat=y
         EOF
 
         make defconfig
