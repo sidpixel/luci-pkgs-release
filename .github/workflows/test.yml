@@ -44,7 +44,7 @@ jobs:
     - name: Configure feeds.conf
       run: |
         cd openwrt
-        cat <<EOF > feeds.conf
+        cat > feeds.conf  << EOF 
         src-git base https://github.com/openwrt/openwrt.git;openwrt-18.06
         src-git-full packages https://github.com/openwrt/packages.git;openwrt-18.06
         src-git-full luci https://git.openwrt.org/project/luci.git;openwrt-18.06
