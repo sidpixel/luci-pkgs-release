@@ -98,6 +98,6 @@ jobs:
       with:
         tag_name: x86-${{ env.REPO_BRANCH }}
         files: |
-          openwrt/bin/targets/x86/generic/openwrt-x86-generic-generic-squashfs-combined-efi.img.gz
-          openwrt/bin/targets/x86/generic/openwrt-x86-generic-generic-squashfs-rootfs.img.gz
+          openwrt/bin/targets/x86/generic/openwrt-x86-generic-combined-ext4.img.gz
+          openwrt/bin/targets/x86/generic/openwrt-x86-generic-combined-squashfs.img.gz
           openwrt/bin/targets/x86/generic/openwrt-x86-generic-generic.manifest
