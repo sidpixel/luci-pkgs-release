@@ -48,8 +48,8 @@ jobs:
         EOF
         git clone https://github.com/destan19/OpenAppFilter.git package/OpenAppFilter
         git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git package/lean/luci-theme-argon
-        ./scripts/feeds update -a        
-        ./scripts/feeds install 
+        #./scripts/feeds update -a        
+        #./scripts/feeds install 
 
     - name: Configure .config file
       run: |
