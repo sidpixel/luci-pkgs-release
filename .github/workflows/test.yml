@@ -66,8 +66,8 @@ jobs:
         CONFIG_PACKAGE_luci-app-upnp=y
         CONFIG_PACKAGE_luci-ssl-openssl=y
         CONFIG_PACKAGE_luci-app-wireguard=y
-
-        EOF       
+        EOF     
+          
         make defconfig
 
     - name : Upload artifact
