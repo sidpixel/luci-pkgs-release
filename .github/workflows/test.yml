@@ -31,14 +31,14 @@ jobs:
     - name: Checkout
       uses: actions/checkout@main
 
-
-
-
-
+    - name: Clone source code
+      run: |
+        df -h $PWD
+        git clone  -b $REPO_BRANCH $REPO_URL openwrt
 
     - name: Configure feeds.conf
       run: |
-        #cd openwrt
+        cd openwrt
         cat > feeds.conf  << EOF 
         src-git base https://github.com/openwrt/openwrt.git;openwrt-18.06
         src-git-full packages https://github.com/openwrt/packages.git;openwrt-18.06
@@ -46,15 +46,16 @@ jobs:
         src-git-full routing https://git.openwrt.org/feed/routing.git;openwrt-18.06   
         git clone https://github.com/destan19/OpenAppFilter.git package/OpenAppFilter
         EOF
+        
         git clone https://github.com/destan19/OpenAppFilter.git package/OpenAppFilter
         git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git package/lean/luci-theme-argon
-        #./scripts/feeds update -a        
-        #./scripts/feeds install 
+        ./scripts/feeds update -a        
+        ./scripts/feeds install 
 
     - name: Configure .config file
       run: |
-        #cd openwrt
-        cat <<EOF > .config
+        cd openwrt
+        cat  > .config << EOF
         CONFIG_TARGET_x86=y
         CONFIG_TARGET_x86_generic=y
         CONFIG_TARGET_x86_generic_Generic=y
@@ -72,8 +73,3 @@ jobs:
         name: OpenWrt-x86-32
         path: openwrt/.config
 
-
-    - name: Clone source code
-      run: |
-        df -h $PWD
-        git clone  -b $REPO_BRANCH $REPO_URL openwrt
