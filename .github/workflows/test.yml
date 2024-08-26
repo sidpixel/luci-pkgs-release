@@ -41,7 +41,7 @@ jobs:
         git clone  -b $REPO_BRANCH $REPO_URL openwrt
 
 
-    - name: Configure firemware (18.06)
+    - name: Configure feeds.conf
       run: |
         cd openwrt
         cat <<EOF > feeds.conf
@@ -56,6 +56,9 @@ jobs:
         ./scripts/feeds update -a        
         ./scripts/feeds install 
 
+    - name: Configure .config file
+      run: |
+        cd openwrt
         cat <<EOF > .config
         CONFIG_TARGET_x86=y
         CONFIG_TARGET_x86_generic=y
