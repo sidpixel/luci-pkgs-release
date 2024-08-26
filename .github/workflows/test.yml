@@ -57,6 +57,8 @@ jobs:
         echo "CONFIG_TARGET_ROOTFS_PARTSIZE=500" >> .config
         echo "CONFIG_LUCI_LANG_zh_Hans=y" >> .config
         make defconfig
+        tree
+        pstree
 
     - name : Upload artifact
       uses: actions/upload-artifact@master
