@@ -62,4 +62,4 @@ jobs:
       uses: actions/upload-artifact@master
       with:
         name: OpenWrt-x86-32
-        path: ./openwrt
+        path: openwrt/.config
