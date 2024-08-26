@@ -26,7 +26,6 @@ env:
 jobs:
   job_build_firmware:
     runs-on: ubuntu-20.04
-
     steps:
     - name: Checkout
       uses: actions/checkout@main
@@ -50,10 +49,6 @@ jobs:
         git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git package/lean/luci-theme-argon
         ./scripts/feeds update -a        
         ./scripts/feeds install 
-
-    - name: Configure .config file
-      run: |
-        cd openwrt
         cat  > .config << EOF
         CONFIG_TARGET_x86=y
         CONFIG_TARGET_x86_generic=y
