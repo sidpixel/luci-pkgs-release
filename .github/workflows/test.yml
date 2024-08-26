@@ -58,6 +58,15 @@ jobs:
         CONFIG_PACKAGE_luci-app-argon-config=y
         CONFIG_PACKAGE_luci-theme-argon=y
         CONFIG_PACKAGE_luci-theme-argon=y
+        CONFIG_PACKAGE_luci-app-adblock=y
+        CONFIG_PACKAGE_luci-app-hd-idle=y
+        CONFIG_PACKAGE_luci-app-minidlna=y
+        CONFIG_PACKAGE_luci-app-samba=y
+        CONFIG_PACKAGE_luci-app-shairplay=y
+        CONFIG_PACKAGE_luci-app-upnp=y
+        CONFIG_PACKAGE_luci-ssl-openssl=y
+        CONFIG_PACKAGE_luci-app-wireguard=y
+
         EOF       
         make defconfig
 
