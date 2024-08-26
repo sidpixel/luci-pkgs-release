@@ -35,11 +35,6 @@ jobs:
 
 
 
-    - name: Clone source code
-      run: |
-        df -h $PWD
-        git clone  -b $REPO_BRANCH $REPO_URL openwrt
-
 
     - name: Configure feeds.conf
       run: |
@@ -76,3 +71,9 @@ jobs:
       with:
         name: OpenWrt-x86-32
         path: openwrt/.config
+
+
+    - name: Clone source code
+      run: |
+        df -h $PWD
+        git clone  -b $REPO_BRANCH $REPO_URL openwrt
