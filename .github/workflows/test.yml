@@ -30,6 +30,13 @@ jobs:
     - name: Checkout
       uses: actions/checkout@main
 
+    - name: Initialization environment and space clean
+      run: |
+        sudo rm -rf /imagegeneration /opt  /usr/local/aws* /usr/local/julia* /usr/share/swift* /usr/share/sbt* \
+        /usr/local/share/chromium* /usr/local/share/powershell* 
+        #docker rmi `docker images -q`
+        sudo -E rm -rf /usr/share/dotnet /etc/mysql /etc/php /etc/apt/sources.list.d /usr/local/lib/android
+        
     - name: Clone source code
       run: |
         df -h $PWD
