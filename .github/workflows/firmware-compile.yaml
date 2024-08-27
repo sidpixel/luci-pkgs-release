@@ -37,7 +37,7 @@ jobs:
       run: |
         sudo rm -rf /imagegeneration /opt  /usr/local/aws* /usr/local/julia* /usr/share/swift* /usr/share/sbt* \
         /usr/local/share/chromium* /usr/local/share/powershell* 
-        #docker rmi `docker images -q`
+        docker rmi `docker images -q`
         sudo -E rm -rf /usr/share/dotnet /etc/mysql /etc/php /etc/apt/sources.list.d /usr/local/lib/android
         #sudo -E apt-mark hold grub-efi-amd64-signed
         sudo -E apt-get update 
