@@ -67,7 +67,6 @@ jobs:
 
         git clone https://github.com/destan19/OpenAppFilter.git package/OpenAppFilter
         git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git package/lean/luci-theme-argon
-        git clone -b v0.38.10-beta  https://github.com/vernesong/OpenClash.git package/OpenClash
         ./scripts/feeds update -a        
         ./scripts/feeds install 
     - name: Configure .config.conf
@@ -88,9 +87,9 @@ jobs:
         CONFIG_PACKAGE_luci-app-samba=y
         CONFIG_PACKAGE_luci-app-shairplay=y
         CONFIG_PACKAGE_luci-app-upnp=y
+        CONFIG_PACKAGE_luci-app-aof=y
         CONFIG_PACKAGE_luci-ssl-openssl=y
         CONFIG_PACKAGE_luci-app-wireguard=y
-        CONFIG_PACKAGE_luci-app-openclash=y
         CONFIG_PACKAGE_uci-base=y
         CONFIG_PACKAGE_luci-compat=y
         EOF
