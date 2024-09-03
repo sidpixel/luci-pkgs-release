@@ -72,7 +72,7 @@ jobs:
     - name: Configure .config.conf
       run: |
         cd openwrt
-        cp  8632.conf .config
+        cp  ../8632.config .config
         make defconfig      
 
     - name: Compile firemware (18.06)
