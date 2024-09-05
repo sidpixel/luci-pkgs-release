@@ -127,19 +127,18 @@ jobs:
         id: compile
         run: |
           cd sdk
-          echo "make package/${{ env.PKGNAME }}/{clean,compile} -j$(nproc)"
-          make package/${{ env.PKGNAME }}/{clean,compile} -j$(nproc)
-          mv bin/packages/i386_pentium4/base/ ../
+          echo "make firmware {clean,compile} -j$(nproc)"
+          make  -j$(nproc)
+
           rm .config .config.old
           cd ..
           echo "status=success" >> $GITHUB_OUTPUT
           echo "FIRMWARE=$PWD" >> $GITHUB_ENV
 
-      - name: Upload package (18.06) ipks to release
-        uses: softprops/action-gh-release@v1
-        if: steps.compile.outputs.status == 'success'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name : Upload artifact
+        uses: actions/upload-artifact@master
         with:
-          tag_name: ${{needs.job_check.outputs.pkg_version}}
-          files: ${{ env.FIRMWARE }}/base/luci*.ipk
+          name: OpenWrt-x86-32
+          path: sdk/bin/targets
+
+ 
