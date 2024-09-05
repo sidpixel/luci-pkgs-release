@@ -74,7 +74,7 @@ jobs:
     name: Build package (18.06)
     needs: job_check
     #if: needs.job_check.outputs.has_update == 'true'
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: Install packages
         run: |
