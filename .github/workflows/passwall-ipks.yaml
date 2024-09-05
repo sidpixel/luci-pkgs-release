@@ -36,7 +36,7 @@ jobs:
   job_check:
     #if: github.repository == ${{ github.repository }}
     name: Check Version
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     outputs:
       pkg_version: ${{ steps.check_version.outputs.latest_version }}
       has_update: ${{ steps.check_version.outputs.has_update }}
@@ -74,7 +74,7 @@ jobs:
     name: Build package (18.06)
     needs: job_check
     #if: needs.job_check.outputs.has_update == 'true'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - name: Install packages
         run: |
@@ -121,14 +121,14 @@ jobs:
           echo "CONFIG_AUTOREMOVE=n" >> .config
           echo "CONFIG_LUCI_LANG_zh_Hans=y" >> .config
           echo "CONFIG_PACKAGE_${{ env.PKGNAME }}=m" >> .config
-          make  FORCE=1 defconfig
+          make   defconfig
 
       - name: Compile package (18.06)
         id: compile
         run: |
           cd sdk
           echo "make firmware {clean,compile} -j$(nproc)"
-          make  FORCE=1 -j$(nproc)
+          make   -j1 V=s
 
           rm .config .config.old
           cd ..
