@@ -28,7 +28,7 @@ on:
 
 env:
   TZ: Asia/Shanghai
-  GITHUBREPO: vernesong/OpenClash.git
+  GITHUBREPO: vernesong/OpenClash
   PKGNAME: luci-app-openclash
 jobs:
   job_check:
