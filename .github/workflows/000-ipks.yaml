@@ -24,17 +24,10 @@ env:
   PKGNAME: luci-app-passwall
 
 
-
-
-
 jobs:
   job_check:
-    #if: github.repository == ${{ github.repository }}
-    name: Check Version
     runs-on: ubuntu-20.04
-    outputs:
-      pkg_version: ${{ steps.check_version.outputs.latest_version }}
-      has_update: ${{ steps.check_version.outputs.has_update }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@main
@@ -44,14 +37,7 @@ jobs:
           echo "clean  space"
           sudo rm -rf /imagegeneration /opt  /usr/local/aws* /usr/local/julia* /usr/share/swift* /usr/share/sbt* /usr/local/share/chromium* /usr/local/share/powershell* 
           sudo -E rm -rf /usr/share/dotnet /etc/mysql /etc/php /etc/apt/sources.list.d /usr/local/lib/android
-
-
-  job_build_package:
-    name: Build 7621 package (18.06)
-    needs: job_check
-    #if: needs.job_check.outputs.has_update == 'true'
-    runs-on: ubuntu-20.04
-    steps:
+          
       - name: Install packages
         run: |
           echo "Install packages"
