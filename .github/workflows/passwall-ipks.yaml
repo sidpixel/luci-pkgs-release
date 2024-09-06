@@ -132,6 +132,7 @@ jobs:
           cd ..
           echo "status=success" >> $GITHUB_OUTPUT
           echo "FIRMWARE=$PWD" >> $GITHUB_ENV
+          ls -alh ${{ env.FIRMWARE }}/base/
 
       - name: Upload Argon (18.06) ipks to release
         uses: softprops/action-gh-release@v1
@@ -140,4 +141,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{needs.job_check.outputs.argon_version}}
-          files: ${{ env.FIRMWARE }}/base/*.ipk
+          files: ${{ env.FIRMWARE }}/base/
