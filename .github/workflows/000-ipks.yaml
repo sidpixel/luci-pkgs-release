@@ -56,22 +56,23 @@ jobs:
           git clone  https://github.com/${{ env.GITHUBREPO }}.git package/downloads/${{ env.PKGNAME }}
           git clone  https://github.com/xiaorouji/openwrt-passwall-packages.git  package/passwall-deps
           git clone  https://github.com/vernesong/OpenClash.git  package/OpenClash
-          ./scripts/feeds update -a
-          echo "CONFIG_PACKAGE_${{ env.PKGNAME }}=m" > .config
-          ./scripts/feeds install -d n ${{ env.PKGNAME }}
-          make download -j8
+
 
       - name: Configure package (18.06)
         run: |
           cd sdk
+          ./scripts/feeds clean 
+          ./scripts/feeds update -a
           ./scripts/feeds install ${{ env.PKGNAME }}
+          
           echo "CONFIG_ALL_NONSHARED=n" > .config
           echo "CONFIG_ALL_KMODS=n" >> .config
           echo "CONFIG_ALL=n" >> .config
           echo "CONFIG_AUTOREMOVE=n" >> .config
           echo "CONFIG_LUCI_LANG_zh_Hans=y" >> .config
           echo "CONFIG_PACKAGE_${{ env.PKGNAME }}=m" >> .config
-          make defconfig
+          make defconfig -j$(nproc)
+          make download   -j$(nproc)
 
       - name: Compile package (18.06)
         id: compile
