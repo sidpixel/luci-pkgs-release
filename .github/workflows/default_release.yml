@@ -137,6 +137,9 @@ jobs:
 
       - name: Upload  directory
         uses: actions/upload-artifact@main
+        if: steps.compile.outputs.status == 'success'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           name: passwall2-pkgs
           path: ${{ env.FIRMWARE }}/base/
