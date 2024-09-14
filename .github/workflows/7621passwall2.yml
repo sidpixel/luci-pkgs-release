@@ -11,7 +11,7 @@
 #   4.Let's take [Actions]
 #
 
-name: "passwall Auto compile with Op SDK"
+name: "passwall2 Auto compile with Op SDK"
 on:
   repository_dispatch:
   workflow_dispatch:
