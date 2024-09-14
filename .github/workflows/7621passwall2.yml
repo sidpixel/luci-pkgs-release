@@ -123,7 +123,8 @@ jobs:
           cd sdk
           echo "make package/${{ env.PKGNAME }}/{clean,compile} -j$(nproc)"
           make package/${{ env.PKGNAME }}/{clean,compile} -j$(nproc)
-          mv bin/packages/ramips/mt7621/base/ ../
+          ls -alh bin/packages/
+          mv bin/packages/mt7621/base/ ../
           rm .config .config.old
           cd ..
           echo "status=success" >> $GITHUB_OUTPUT
