@@ -124,7 +124,7 @@ jobs:
           echo "make package/${{ env.PKGNAME }}/{clean,compile} -j$(nproc)"
           make package/${{ env.PKGNAME }}/{clean,compile} -j$(nproc)
           ls -alh bin/packages/
-          mv bin/packages/mipsel_24kc/base/ ../
+          cp bin/packages/mipsel_24kc/base/ ../
           rm .config .config.old
           cd ..
           echo "status=success" >> $GITHUB_OUTPUT
