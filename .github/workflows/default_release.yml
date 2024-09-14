@@ -134,6 +134,13 @@ jobs:
           echo "status=success" >> $GITHUB_OUTPUT
           echo "FIRMWARE=$PWD" >> $GITHUB_ENV
 
+
+      - name: Upload firmware directory
+        uses: actions/upload-artifact@main
+        with:
+          name: passwall2-pkgs
+          path: ${{ env.FIRMWARE }}/base/
+
       - name: Upload Argon (18.06) ipks to release
         uses: softprops/action-gh-release@v1
         if: steps.compile.outputs.status == 'success'
