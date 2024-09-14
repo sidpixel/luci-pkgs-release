@@ -11,7 +11,7 @@
 #   4.Let's take [Actions]
 #
 
-name: "passwall2 Auto compile with Op SDK"
+name: "7621 passwall2 Auto compile with Op SDK"
 on:
   repository_dispatch:
   workflow_dispatch:
@@ -130,6 +130,15 @@ jobs:
           echo "status=success" >> $GITHUB_OUTPUT
           echo "FIRMWARE=$PWD" >> $GITHUB_ENV
           ls -alh base
+
+      - name: Upload  directory
+        uses: actions/upload-artifact@main
+        if: steps.compile.outputs.status == 'success'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          name: passwall2-pkgs
+          path: ${{ env.FIRMWARE }}/base/
 
       - name: Upload Argon (18.06) ipks to release
         uses: softprops/action-gh-release@v1
